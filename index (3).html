@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Acceleration Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-weight: bold;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Car Acceleration Comparison</h1>
+
+  <label for="v1">Car 1 - Final Speed (m/s):</label>
+  <input type="number" id="v1" placeholder="e.g., 30" required>
+
+  <label for="t1">Car 1 - Time (s):</label>
+  <input type="number" id="t1" placeholder="e.g., 5" required>
+
+  <label for="v2">Car 2 - Final Speed (m/s):</label>
+  <input type="number" id="v2" placeholder="e.g., 28" required>
+
+  <label for="t2">Car 2 - Time (s):</label>
+  <input type="number" id="t2" placeholder="e.g., 4.5" required>
+
+  <button onclick="calculate()">Calculate Acceleration</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  function calculate() {
+    const v1 = parseFloat(document.getElementById('v1').value);
+    const t1 = parseFloat(document.getElementById('t1').value);
+    const v2 = parseFloat(document.getElementById('v2').value);
+    const t2 = parseFloat(document.getElementById('t2').value);
+    const result = document.getElementById('result');
+
+    if (isNaN(v1) || isNaN(t1) || isNaN(v2) || isNaN(t2) || t1 <= 0 || t2 <= 0) {
+      result.textContent = 'Please enter valid speeds and times greater than 0.';
+      return;
+    }
+
+    const a1 = v1 / t1;
+    const a2 = v2 / t2;
+
+    let comparison = `Car 1 Acceleration: ${a1.toFixed(2)} m/s²\nCar 2 Acceleration: ${a2.toFixed(2)} m/s²\n\n`;
+
+    if (a1 > a2) {
+      comparison += '🚗 Car 1 has better acceleration.';
+    } else if (a2 > a1) {
+      comparison += '🚙 Car 2 has better acceleration.';
+    } else {
+      comparison += '⚖️ Both cars have the same acceleration.';
+    }
+
+    result.textContent = comparison;
+  }
+</script>
+
+</body>
+</html>
